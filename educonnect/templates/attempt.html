@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% set title = "Attempt" %}
+
+{% block content %}
+    <h5 class="mt-4 text-muted">Attempt Quiz</h5>
+    <h2>{{ quiz.title }}</h2>
+
+    <form method="post">
+        {% for question in quiz.questions %}
+            <div class="my-2 p-3 bg-white rounded border">
+                <h5>{{ question.question }}</h5>
+                <textarea class="form-control" name="answers-{{ question.id }}" required></textarea>
+            </div>
+        {% endfor %}
+        <input type="submit" value="Submit" class="btn btn-primary px-5">
+    </form>
+{% endblock %}

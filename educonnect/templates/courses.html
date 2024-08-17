@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% set title = "Discussions" %}
+
+{% block content %}
+    <div class="mt-4">
+        {% include "flash-messages.html" %}
+    </div>
+
+    <div class="accordion mt-4" id="enroll">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                    Enroll in a Course
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                 data-bs-parent="#enroll">
+                <div class="accordion-body">
+                    <form method="POST" class="d-flex align-items-center gap-2">
+                        <label class="form-label w-100">
+                            Select a Course to enroll
+                            <select class="form-select" name="course_id" required>
+                                <option>-- Choose Course --</option>
+                                {% for course in available_courses %}
+                                    <option value="{{ course.id }}">{{ course.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                        <input class="btn btn-secondary mt-3 px-5" type="submit" value="Enroll">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h2>Enrolled Courses</h2>
+        <div class="row">
+            {% for course in current_user.enrolled_courses %}
+                <div class="col-6 col-md-2 p-2">
+                    <div class="bg-white text-center p-5 rounded border">
+                        <h5>{{ course.title }}</h5>
+                        <a href="{{ url_for("main.view_lectures", course_id=course.id) }}">View Lectures</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

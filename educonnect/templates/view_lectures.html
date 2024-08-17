@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% set title = "Lectures" %}
+
+{% block content %}
+    <div class="mt-4">
+        <h2>{{ course.title }} Lectures</h2>
+        <div class="row">
+            {% for lecture in course.video_lectures %}
+                <div class="col-12 col-md-4 p-3">
+                    <div class="bg-white p-3">
+                        {{ lecture.youtube_link|safe }}
+                        <h5 class="text-center">{{ lecture.title }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

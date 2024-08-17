@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% set title = "Quiz" %}
+
+{% block content %}
+    <div class="mt-4">
+        <h2>Create a New Quiz For {{ course.title }}</h2>
+        <form action="{{ url_for('teacher.create_quiz', course_id=course.id) }}" class="p-3 border rounded"
+              method="post">
+            <div class="d-flex justify-content-end">
+                <a id="add-question" class="btn btn-secondary">Add New Question</a>
+                <button type="submit" class="btn btn-success ms-2">Create Quiz</button>
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <h4 class="text-muted">Questions</h4>
+            <div id="questionContainer">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        document.getElementById("add-question").addEventListener("click", function () {
+            var questionCount = document.querySelectorAll('textarea[name="questions"]').length + 1;
+
+            var newQuestionLabel = document.createElement("label");
+            newQuestionLabel.className = "form-label w-100";
+            newQuestionLabel.innerHTML = "<b>Question " + questionCount + "</b>";
+
+            var newTextarea = document.createElement("textarea");
+            newTextarea.className = "form-control";
+            newTextarea.name = "questions";
+            newTextarea.required = true;
+            newTextarea.rows = 4;
+            newQuestionLabel.appendChild(newTextarea);
+
+            document.getElementById("questionContainer").appendChild(newQuestionLabel);
+        });
+    </script>
+{% endblock %}

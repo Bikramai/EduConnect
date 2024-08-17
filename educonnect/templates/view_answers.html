@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% set title = "View Answers" %}
+
+{% block content %}
+    <h5 class="mt-4 text-muted">View Answers</h5>
+    <h2>{{ quiz.quiz.title }}</h2>
+    <h6 class="text-muted">{{ quiz.user.full_name }}</h6>
+    <hr>
+    <h4>Solution</h4>
+    {% for question, answer in solution %}
+        <div class="p-3 border rounded bg-white my-2">
+            <h6>{{ question.question }}</h6>
+            <p style="white-space: pre-line">{{ answer.answer }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

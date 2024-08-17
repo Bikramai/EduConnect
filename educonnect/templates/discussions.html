@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% set title = "Discussions" %}
+
+{% block content %}
+    <div class="mt-4">
+        {% include "flash-messages.html" %}
+    </div>
+
+    <div class="accordion mt-4" id="create_discussion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                    Create a new discussion
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                 data-bs-parent="#create_discussion">
+                <div class="accordion-body">
+                    <form method="POST">
+                        <label class="form-label w-100">
+                            Title
+                            <input class="form-control" type="text" name="title" placeholder="Title" required>
+                        </label>
+                        <label class="form-label w-100">
+                            Content
+                            <textarea rows="10" class="form-control" name="content" placeholder="Content"
+                                      required></textarea>
+                        </label>
+                        <input class="btn btn-secondary mt-3 px-5" type="submit" value="Create">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h2>Discussions</h2>
+        <div class="row">
+            {% for discussion in discussions %}
+                <div class="col-12 col-md-4 col-lg-3 mt-2">
+                    <div class="bg-white p-2 card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ url_for('main.discussion_detail', discussion_id=discussion.id) }}" class="text-dark">{{ discussion.title }}</a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ discussion.started_by.full_name }}</h6>
+                            <small>{{ discussion.get_comment_count() }} comments</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

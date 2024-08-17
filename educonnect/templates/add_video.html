@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% set title = "Add Video Lecture" %}
+
+{% block content %}
+    <div class="mt-5">
+        <h3>Add Video Lecture</h3>
+        <form method="post" class="p-5 border bg-white rounded">
+            <label class="form-label w-100">
+                Lecture Title
+                <input class="form-control" type="text" name="title" required>
+            </label>
+            <label class="form-label w-100">
+                Youtube Embed Link
+                <small class="d-block text-danger">Please change the width to 100% and height to 300px</small>
+                <textarea class="form-control" name="youtube_link" rows="3" required></textarea>
+            </label>
+            <input class="btn btn-primary px-5" type="submit" value="Add">
+        </form>
+    </div>
+{% endblock %}

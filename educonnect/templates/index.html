@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% set title = "Home" %}
+
+{% block content %}
+    <h2 class="mt-4">Assigned Quizzes</h2>
+    {% include "flash-messages.html" %}
+    <hr>
+    <div class="row">
+        {% for quiz in pending_quizzes %}
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ quiz.quiz.title }}</h5>
+                        <p class="card-text">{{ quiz.quiz.questions | length }} Questions</p>
+                        <a class="btn btn-warning" href="{{ url_for('main.attempt', quiz_id=quiz.quiz.id) }}">Attempt</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

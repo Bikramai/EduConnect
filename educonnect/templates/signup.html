@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% set title = "SignUp" %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-6 mt-5 bg-white p-5 rounded shadow">
+            <h1 class="text-center">SignUp</h1>
+            {% include "flash-messages.html" %}
+            <form method="POST">
+                <label class="form-label w-100">
+                    Full Name
+                    <input class="form-control" type="text" name="fullname" placeholder="Full Name" required>
+                </label>
+                <label class="form-label w-100">
+                    Username
+                    <input class="form-control" type="text" name="username" placeholder="Username" required>
+                </label>
+                <label class="form-label w-100">
+                    Password
+                    <input class="form-control" type="password" name="password" placeholder="Password" required>
+                </label>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="1" name="is_teacher">
+                            I am a teacher
+                        </label>
+                    </div>
+                    <div>
+                        <a class="btn btn-link" href="{{ url_for('auth.signin') }}">Already have an account!</a>
+                    </div>
+                </div>
+                <input class="btn btn-secondary w-100 mt-3" type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div>
+{% endblock %}
